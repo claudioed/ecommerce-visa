@@ -1,7 +1,9 @@
 package tech.claudioed.domain.service;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 import tech.claudioed.domain.Order;
 
 @ApplicationScoped
@@ -21,7 +23,8 @@ public class TransactionEmitter {
   @ConfigProperty(name = "ce.content.type")
   String ceContentType;
 
-  public TransactionEmitter(TransactionCloudEventsSender transactionCloudEventsSender) {
+  @Inject
+  public TransactionEmitter(@RestClient TransactionCloudEventsSender transactionCloudEventsSender) {
     this.transactionCloudEventsSender = transactionCloudEventsSender;
   }
 
